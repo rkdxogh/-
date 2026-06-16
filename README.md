@@ -28,59 +28,68 @@
 
 ### 💻 구현 소스코드 (`m.py`)
 
+```python
 import random
-import string
 
 # ==============================================================================
-# [오픈소스 출처 주석 명시]
-# 1. 성적 데이터 통계 처리 구조: GitHub ([github.com/learnbyexample/Python_Data_Processing](https://github.com/learnbyexample/Python_Data_Processing)) 참고
-# 2. 다중 점수 합산/평균 알고리즘: GitHub ([github.com/gmyoungblood/IAAI-EasyChair-CSV-Paper-Score-Processor](https://github.com/gmyoungblood/IAAI-EasyChair-CSV-Paper-Score-Processor)) 참고
-# 3. 암호학적 문자열 조합 로직: Python 공식 저장소 ([github.com/python/cpython](https://github.com/python/cpython) Lib/secrets.py) 참고
+# [오픈소스 및 외부 소스코드 참고 출처]
+# 1. 성적 통계 알고리즘: GitHub 오픈소스 수치 데이터 처리 예제 참고
+#    (URL: https://github.com/learnbyexample/Python_Data_Processing)
+# 2. 다중 점수 데이터 루프 구조: GitHub 학술 데이터 합산 스크립트 구조 활용
+#    (URL: https://github.com/gmyoungblood/IAAI-EasyChair-CSV-Paper-Score-Processor)
+# 3. 비밀번호 무작위 문자열 조합 알고리즘: Python 공식 문서 자습서 안내 가이드 참고
+#    (URL: https://github.com/python/cpython)
 # ==============================================================================
 
 def calculate_grades(student_scores):
-    """
-    학생들의 성적 리스트를 받아 총점, 평균을 계산하는 함수
-    """
-    print("\n[성적 처리 결과]")
-    print("-" * 40)
-    for name, score in student_scores.items():
-        total = sum(score)
-        avg = total / len(score)
-        print(f"학생 이름: {name} | 총점: {total}점 | 평균: {avg:.2f}점")
-    print("-" * 40)
+    print("\n[ 학생 성적 통계 결과 ]")
+    print("-" * 50)
+    
+    for name in student_scores:
+        scores = student_scores[name]
+        
+        total_score = sum(scores)
+        average_score = total_score / len(scores)
+        
+        print(f"학생 이름: {name} | 총점: {total_score}점 | 평균: {average_score:.2f}점")
+        
+    print("-" * 50)
+
 
 def generate_secure_password(length=12):
-    """
-    사용자가 지정한 길이에 맞춰 보안성이 높은 비밀번호를 생성하는 함수
-    """
     if length < 4:
-        return "비밀번호 길이는 최소 4자리 이상이어야 합니다."
+        return "비밀번호는 최소 4자리 이상으로 설정해야 합니다."
         
-    # 문자 세트 구성 (소문자, 대문자, 숫자, 특수문자)
-    characters = string.ascii_letters + string.digits + string.punctuation
+    lower_case = "abcdefghijklmnopqrstuvwxyz"
+    upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    numbers = "0123456789"
+    special_chars = "!@#$"
     
-    # 무작위 조합 생성
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+    all_characters = lower_case + upper_case + numbers + special_chars
+    
+    password_result = ""
+    for _ in range(length):
+        random_char = random.choice(all_characters)
+        password_result = password_result + random_char
+        
+    return password_result
 
-# --- 프로그램 실행 및 테스트 ---
+
 if __name__ == "__main__":
-    # 1. 성적 처리 테스트 데이터
-    sample_scores = {
+    my_class_scores = {
         "Kim": [90, 85, 95],
         "Lee": [80, 78, 88],
         "Park": [95, 92, 100]
     }
-    calculate_grades(sample_scores)
     
-    # 2. 비밀번호 생성 테스트
-    pwd_length = 14
-    new_password = generate_secure_password(pwd_length)
-    print(f"\n[안전한 비밀번호 생성 결과 (길이: {pwd_length})]")
-    print(f"생성된 비밀번호: {new_password}")
-    print("-" * 40)
-    pwd_length = 14
+    calculate_grades(my_class_scores)
+    
+    user_length = 12
+    generated_pwd = generate_secure_password(user_length)
+    
+    print(f"\n[ 신규 비밀번호 발급 결과 (길이: {user_length}자) ]")
+    print(f"생성된 암호: {generated_pwd}")
+    print("-" * 50)
     new_password = generate_secure_password(pwd_length)
     print(f"\n[안전한 비밀번호 생성 결과 (길이: {pwd_length})]")
     print(f"생성된 비밀번호: {new_password}")
