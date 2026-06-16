@@ -28,7 +28,6 @@
 
 ### 💻 구현 소스코드 (`m.py`)
 
-```python
 import random
 import string
 
