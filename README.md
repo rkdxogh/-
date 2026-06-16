@@ -22,7 +22,7 @@
 ## 3. 프로그램 소스코드 및 오픈소스 출처 (References)
 
 * **비밀번호 생성 암호학 모듈 참조**
-  * [GitHub - python/cpython (secrets module)](https://github.com/python/cpython/blob/main/Lib/secrets.py) : 파이썬 공식 소스코드 저장소로, 난수 기반의 무작위 비밀번호 문자열 조합을 안전하게 생성하는 내장 모듈의 구조를 확인하고 참조하였습니다.
+  * [GitHub - python/cpython (secrets module)](https://github.com/python/cpython/blob/main/Lib/secrets.py) 
 
 ---
 
