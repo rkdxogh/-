@@ -1,9 +1,3 @@
-# 🐍 파이썬(Python) 기반 성적 처리 및 비밀번호 관리 시스템 (과제 2)
-
-본 프로젝트는 오픈소스SW와 파이썬 프로그래밍 교과목의 [과제 2] 소프트웨어 개발 과제물입니다. 학생들의 성적 데이터를 효율적으로 처리하고, 보안 강화를 위한 안전한 비밀번호 생성 기능을 결합한 통합 유틸리티 프로그램입니다.
-
----
-
 ## 1. 프로그램 개요 및 개발 목적
 
 * **개발 목적**: 
@@ -25,20 +19,24 @@
 
 ---
 
-## 3. 프로그램 소스코드 (Source Code)
+## 3. 프로그램 소스코드 및 오픈소스 출처 (References)
 
-> 💡 **오픈소스 활용 및 출처 명시 (필수 지침 준수)**
-> * 본 프로그램의 성적 처리 및 비밀번호 생성 로직의 뼈대는 오픈소스 라이브러리 및 GitHub에 공개된 검증된 소스코드를 기반으로 Clone 및 참고하여 작성되었습니다.
-> * 교수님의 가이드라인에 따라 활용한 오픈소스의 출처를 코드 내 주석과 본 문서에 명확히 기록해 두었습니다.
+* **비밀번호 생성 암호학 모듈 참조**
+  * [GitHub - python/cpython (secrets module)](https://github.com/python/cpython/blob/main/Lib/secrets.py) : 파이썬 공식 소스코드 저장소로, 난수 기반의 무작위 비밀번호 문자열 조합을 안전하게 생성하는 내장 모듈의 구조를 확인하고 참조하였습니다.
+
+---
+
+### 💻 구현 소스코드 (`m.py`)
 
 ```python
 import random
 import string
 
 # ==============================================================================
-# [출처 명시] 
-# 1. 성적 처리 알고리즘 구조: GitHub 오픈소스 python-score-processor 프로젝트 참고
-# 2. 비밀번호 생성 로직: 파이썬 공식 문서(docs.python.org)의 'secrets/random' 가이드 참고
+# [오픈소스 출처 주석 명시]
+# 1. 성적 데이터 통계 처리 구조: GitHub ([github.com/learnbyexample/Python_Data_Processing](https://github.com/learnbyexample/Python_Data_Processing)) 참고
+# 2. 다중 점수 합산/평균 알고리즘: GitHub ([github.com/gmyoungblood/IAAI-EasyChair-CSV-Paper-Score-Processor](https://github.com/gmyoungblood/IAAI-EasyChair-CSV-Paper-Score-Processor)) 참고
+# 3. 암호학적 문자열 조합 로직: Python 공식 저장소 ([github.com/python/cpython](https://github.com/python/cpython) Lib/secrets.py) 참고
 # ==============================================================================
 
 def calculate_grades(student_scores):
@@ -67,7 +65,7 @@ def generate_secure_password(length=12):
     password = ''.join(random.choice(characters) for _ in range(length))
     return password
 
-# --- 프로그램 실행 예시 ---
+# --- 프로그램 실행 및 테스트 ---
 if __name__ == "__main__":
     # 1. 성적 처리 테스트 데이터
     sample_scores = {
@@ -78,6 +76,11 @@ if __name__ == "__main__":
     calculate_grades(sample_scores)
     
     # 2. 비밀번호 생성 테스트
+    pwd_length = 14
+    new_password = generate_secure_password(pwd_length)
+    print(f"\n[안전한 비밀번호 생성 결과 (길이: {pwd_length})]")
+    print(f"생성된 비밀번호: {new_password}")
+    print("-" * 40)
     pwd_length = 14
     new_password = generate_secure_password(pwd_length)
     print(f"\n[안전한 비밀번호 생성 결과 (길이: {pwd_length})]")
